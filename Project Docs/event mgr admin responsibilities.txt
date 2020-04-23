@@ -1,0 +1,7 @@
+    1. Create and archive short-term event database(s).
+    2. Manage or work directly with database, web, and Linux administrators.
+    2. Manage or work directly with ETL administrators.
+    3. Manage and support accounts and users.
+    4. Manage and support events and related event data.
+    5. Maintain Python, SQL, HTML, CSS, JavaScript, React
+    5. Create reports 

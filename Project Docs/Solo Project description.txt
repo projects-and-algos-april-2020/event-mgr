@@ -1,0 +1,29 @@
+James Traub - Solo Project 
+https://github.com/projects-and-algos-april-2020/event-mgr.git
+
+My Solo Project allows prospective college students to manage higher education event data via web portal.
+
+My Solo Project MVP has the following functionality;
+    1. Allow students to create a login account on the web portal and if desired add additional demographic data. 
+    2. Allow students to fill out a form that creates a simple web page similar to a business card (tiny URL?) and provide a URL containing the students name?
+    3. Connect to Facebook and Twitter to send event registration updates.
+    4. Allow students to register for events with the option to cancel. The event information should be viewable on the student dashboard.
+
+
+Product Backlog
+Focus - Organization Event Manager and Systems Administrator 
+Add the functionality required by an administrator to manage events hosted by 
+her/his organization. That functionality includes the following;
+    1. Create and archive short-term event database(s).
+    2. Store user documents without conversion to the file type or data in a file system or imported as a csv file to a secure database was the ultimate goal.
+    3. Create module to manage accounts, users, event participants, and events.
+    4. Provide data management interface for searching and troubleshooting data related issues.
+    5. Provide customer with access to front-end source code (HTML, CSS, JavaScript, React, jQuery)
+    5. Create reports and user interface to run generic reports 
+
+Focus - Student Account User
+1. Create functionality to create, print, and archive event badges for event participants.
+2. Allow the end user to register for events from within the app to save the data.
+3. Store education related grades and tests.
+
+

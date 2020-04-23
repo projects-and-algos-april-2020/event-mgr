@@ -144,21 +144,14 @@ def ifgood():
     return render_template("student_dashboard.html", events=student_events, st_acct=st_acct)
 
 
-@app.route('/reg_event', methods=['POST'])
-def add_reg():
-    is_valid = True
-    if len(request.form['author']) < 4:
-        is_valid = False
-        flash('Author must be at least 4 characters long.')
-    if len(request.form['quote']) < 11:
-        is_valid = False
-        flash('Quote must be at least 11 characters long.')
-    if is_valid:
-        mysql = connectToMySQL('event_manager')
-        query = "INSERT INTO quotes (user_id, author, quote, created_at, updated_at) VALUES (%(user_id)s, %(author)s, %(quote)s, NOW(), NOW())"
-        data = {"author": request.form["author"],
-                "quote": request.form["quote"], "user_id": session["user_id"]}
-        mysql = mysql.query_db(query, data)
+@app.route('/reg_event/<id>')
+def add_regevent(id):
+    if 'user_id' not in session:
+        return redirect('/')
+    mysql = connectToMySQL('event_manager')
+    query = "INSERT INTO studentacct_event (student_account_id, event_id) VALUES (%(student)s, %(event)s)"
+    data = {"student": session["user_id"], "event": (id)}
+    eventreg = mysql.query_db(query, data)
     return redirect("/success")
 
 
@@ -218,15 +211,23 @@ def edit_myaccount(user_id):
         if len(request.form['phone_number']) < 1:
             flash("Please enter your phone number.")
             is_valid = False
+        if len(request.form['int_fb']) < 1:
+            flash("Please enter your Facebook API Key.")
+            is_valid = False
+        if len(request.form['int_tw']) < 1:
+            flash("Please enter your Twitter API Key.")
+            is_valid = False
         if is_valid:
             mysql = connectToMySQL('event_manager')
-            query = "UPDATE student_accounts SET school_name = %(schname)s, first_name = %(fname)s, last_name = %(lname)s, email = %(email)s, phone_number = %(phone)s, updated_at = NOW() WHERE id = %(user_id)s"
+            query = "UPDATE student_accounts SET school_name = %(schname)s, first_name = %(fname)s, last_name = %(lname)s, email = %(email)s, phone_number = %(phone)s, int_fb = %(fb)s, int_tw = %(tw)s, updated_at = NOW() WHERE id = %(user_id)s"
             data = {
                 'schname': request.form['school_name'],
                 'fname': request.form['first_name'],
                 'lname': request.form['last_name'],
                 'email': request.form['email'],
                 'phone': request.form['phone_number'],
+                'fb': request.form['int_fb'],
+                'tw': request.form['int_tw'],
                 'user_id': session['user_id']
             }
             mysql = mysql.query_db(query, data)
