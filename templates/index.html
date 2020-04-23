@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"> </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* * {
+        outline-style: solid;
+        outline-color: black;
+        outline-width: 1pt;
+    }*/
+        #wrapper {
+            width: 900px;
+            margin: 0px auto;
+        }
+
+        div.col_top {
+            width: 900px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        div.jumbo_content {
+            padding: 0px 0px 0px 60px;
+        }
+
+        div.reg_col_left {
+            width: 900px;
+            display: inline-block;
+            vertical-align: top;
+            padding: 20px 25px 0px 34px;
+            background-color: rgb(14, 103, 158);
+            color: white;
+            border-radius: 20px;
+            margin: -40px 15px 0px 0px;
+        }
+
+        div.reg_col_right {
+            width: 900px;
+            display: inline-block;
+            vertical-align: top;
+            padding: 20px 25px 0px 34px;
+            background-color: rgb(14, 103, 158);
+            color: white;
+            border-radius: 20px;
+            margin: 10px 15px 0px 0px;
+        }
+    </style>
+    <title>Event Manager by Tweedy</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="jumbo_content"><h3 style="color:rgb(12, 219, 12);"><img src="static/capital.PNG" alt="1000MODS">
+                    Welcome to the Student Event Manager portal by TWEEDY
+                </h3>
+                <h4>Let's get started!</h4>
+                </div>
+            </div>
+        </div>
+        <div class="reg_col_left">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h5>Student Login</h5><br>
+            <form action="/login" method='POST'>
+                <div class="form-group row">
+                    <label for="email" class="col-lg-4 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-lg-4 col-form-label">Password</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-1">
+                        <input type="submit" class="btn btn-warning" value="Login">
+                    </div>
+                </div>
+            </form>
+        </div>
+            <div class="reg_col_right">
+                <h5>New Users Register Here</h5><br>
+                <form action="/save_user" method='POST'>
+                    <div class="form-group row">
+                        <label for="school_name" class="col-lg-4 col-form-label">School Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="school_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="first_name" class="col-lg-4 col-form-label">First Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="first_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="last_name" class="col-lg-4 col-form-label">Last Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="last_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-lg-4 col-form-label">Email</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-lg-4 col-form-label">Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="passwordcon" class="col-lg-4 col-form-label">Confirm Pass</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" name="passwordcon">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group row">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-3">
+                            <input type="submit" color class="btn btn-warning" value="Register">
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</body>
+
+</html>
