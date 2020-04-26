@@ -96,7 +96,7 @@
     <div id="container">
         <div id="header">
             <p></p>
-            <a href="/register_event/{{ session['user_id'] }}" class="button">Register</a>
+            <a href="/register_event/{{session['user_id'] }}" class="button">Register</a>
             <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
         </div>
         <div id="greeting">Welcome back {{ session['first_name'] }} {{ session['last_name'] }}!</div>
@@ -146,7 +146,7 @@
                         <th>Date and Time</th>
                         <th>Host</th>
                         <th>Notes</th>
-                        <th>Send To</th>
+                        <th>Event Updates</th>
                     </tr>
                 </thead>
                 {% for event in events %}
@@ -158,7 +158,8 @@
                     <td>
                         <a href='#'>Facebook | </a>
                         <a href='#'>Twitter | </a>
-                        <a href='#'>Archive</a>
+                        <a href='#'>Archive | </a>
+                        <a href="/cancel/{{event['sae_id']}}" type="submit" class="button">Cancel</a>
                     </td>
                 </tr>
                 {% endfor %}
