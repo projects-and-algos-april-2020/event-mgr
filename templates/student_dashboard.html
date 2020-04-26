@@ -34,6 +34,7 @@
 
         #greeting {
             margin: 0px 420px 0px 20px;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 18pt;
             padding: 15px 0px 14px 0px;
             display: inline-block;
@@ -60,7 +61,7 @@
             vertical-align: top;
             padding: 10px 35px 10px 20px;
             margin: 20px;
-            background-color: rgb(17, 41, 85);
+            background-color: rgb(25, 60, 126);
             color: white;
         }
 
@@ -70,7 +71,7 @@
             vertical-align: top;
             padding: 10px 35px 10px 20px;
             margin: 20px;
-            background-color: rgb(17, 85, 17);
+            background-color: rgb(27, 124, 27);
             color: white;
         }
 
@@ -82,10 +83,10 @@
             padding: 0px 5px 0px 5px;
             outline-width: 1px;
             outline-style: solid;
-            outline-color: rgb(17, 85, 17);
+            outline-color: rgb(27, 124, 27);
             background-color: white;
             color:black;
-            font-size: 11pt;
+            font-size: 9pt;
 
         }
     </style>
@@ -96,7 +97,7 @@
     <div id="container">
         <div id="header">
             <p></p>
-            <a href="/register_event/{{session['user_id'] }}" class="button">Register</a>
+            <a href="/register_event" class="button">Register</a>
             <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
         </div>
         <div id="greeting">Welcome back {{ session['first_name'] }} {{ session['last_name'] }}!</div>
@@ -131,7 +132,7 @@
                         <td>{{ st_acct['int_fb'] }}</td>
                         <td>{{ st_acct['int_tw'] }}</td>
                         <td>
-                        <a href="/update_acct/<user_id>" class="button">Edit Account Settings</a>
+                        <a href="/update_acct/{{session['user_id']}}" class="button">Edit Account Settings</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -145,21 +146,18 @@
                         <th>Event Name</th>
                         <th>Date and Time</th>
                         <th>Host</th>
-                        <th>Notes</th>
                         <th>Event Updates</th>
                     </tr>
                 </thead>
-                {% for event in events %}
+                {% for st_event in st_events %}
                 <tr>
-                    <td>{{ event['event_name'] }}</td>
-                    <td>{{ event['start_date'] }}</td>
-                    <td>{{ event['host'] }}</td>
-                    <td>{{ event['city'] }}</td>
+                    <td>{{ st_event['event'] }}</td>
+                    <td>{{ st_event['date_time'] }}</td>
+                    <td>{{ st_event['host'] }}</td>
                     <td>
                         <a href='#'>Facebook | </a>
                         <a href='#'>Twitter | </a>
-                        <a href='#'>Archive | </a>
-                        <a href="/cancel/{{event['sae_id']}}" type="submit" class="button">Cancel</a>
+                        <a href="/cancel/{{st_event['id']}}" type="submit" class="button">Cancel Registration</a>
                     </td>
                 </tr>
                 {% endfor %}

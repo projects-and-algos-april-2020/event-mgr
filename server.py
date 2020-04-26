@@ -15,8 +15,8 @@ def index():
         return render_template("index.html")
 
 
-@app.route('/register_event/<user_id>')
-def reg_valid(user_id):
+@app.route('/register_event')
+def reg_valid():
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
@@ -24,8 +24,8 @@ def reg_valid(user_id):
     data = {'id': session['user_id']}
     reg_user = mysql.query_db(query, data)
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM events"
-    data = {'id': session['user_id']}
+    query = "SELECT id, event_name, start_date, host FROM events WHERE id NOT IN (SELECT event_id FROM event_participants WHERE student_account_id = %(uid)s)"
+    data = {'uid': session['user_id']}
     reg_events = mysql.query_db(query, data)
     if reg_user and reg_user[0]['id'] == session['user_id']:
         return render_template("register_event.html", events=reg_events)
@@ -37,8 +37,8 @@ def account_valid(user_id):
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM student_accounts WHERE id = %(user_id)s"
-    data = {'user_id': session['user_id']}
+    query = "SELECT * FROM student_accounts WHERE id = %(id)s"
+    data = {'id': session['user_id']}
     this_user = mysql.query_db(query, data)
     if this_user and this_user[0]['id'] == session['user_id']:
         return render_template("update_student_acct.html", user=this_user[0])   
@@ -134,18 +134,14 @@ def ifgood():
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM student_accounts WHERE id = %(user_id)s;"
-    data = {"user_id": session["user_id"]}
+    query = "SELECT * FROM student_accounts WHERE id = %(id)s;"
+    data = {'id': session['user_id']}
     st_acct = mysql.query_db(query, data)
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM studentacct_event WHERE student_account_id = %(user_id)s;"
-    data = {"user_id": session["user_id"]}
-    st_events = mysql.query_db(query, data)
-    mysql = connectToMySQL('event_manager')
-    query = "SELECT events.id, events.event_name, events.start_date, events.host, events.notes, studentacct_event.id AS 'sae_id' FROM events JOIN studentacct_event ON events.id=studentacct_event.event_id WHERE start_date > NOW() AND studentacct_event.student_account_id = %(id)s;"
+    query = "SELECT * FROM event_participants WHERE student_account_id = %(id)s;"
     data = {'id': session['user_id']}
-    student_events = mysql.query_db(query,data)
-    return render_template("student_dashboard.html", st_events=st_events, events=student_events, st_acct=st_acct)
+    st_events = mysql.query_db(query, data)
+    return render_template("student_dashboard.html",  st_acct=st_acct, st_events=st_events)
 
 
 @app.route('/reg_event/<id>')
@@ -153,12 +149,12 @@ def add_regevent(id):
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
-    query = "INSERT INTO studentacct_event (student_account_id, event_id) VALUES (%(student)s, %(event)s)"
-    data = {'student': session['user_id'], 'event': (id)}
+    query = "INSERT INTO studentacct_event (student_account_id, event_id, created_at, updated_at) VALUES (%(student)s, %(event)s, NOW(),NOW())"
+    data = {'student': session['user_id'], 'event': int(id)}
     eventreg = mysql.query_db(query, data)
     mysql = connectToMySQL('event_manager')
-    query = "INSERT INTO event_participants(`event`, `date_time`, `host`, `email`, `notes`, `created_at`, `updated_at`, `event_id`) SELECT events.event_name, events.start_date, events.host, events.email, events.notes, NOW(), NOW(), events.id FROM events WHERE events.id=%(id)s"
-    data = {'student': session['user_id'], 'event': (id)}
+    query = "INSERT INTO event_participants(event, student_account_id, event_id, date_time, host, notes, created_at, updated_at) SELECT events.event_name, %(student)s, events.id, events.start_date, events.host, events.notes, NOW(), NOW() FROM events WHERE events.id=%(event)s"
+    data = {'student': session['user_id'], 'event': int(id)}
     reg_tbl = mysql.query_db(query, data)
     return redirect("/success")
 
@@ -247,13 +243,13 @@ def edit_myaccount(user_id):
 @app.route('/cancel/<id>')
 def cancel_reg(id):
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM student_accounts WHERE id = %(user_id)s"
-    data = {'user_id': session['user_id']}
+    query = "SELECT * FROM student_accounts WHERE id = %(id)s"
+    data = {'id': session['user_id']}
     cancel_event_reg = mysql.query_db(query, data)
     if cancel_event_reg and cancel_event_reg[0]['id'] == session['user_id']:
         mysql = connectToMySQL('event_manager')
-        query = "DELETE FROM studentacct_event WHERE student_account_id = %(student_account_id)s AND event_id = %(event)s;"
-        data = {'student': session['user_id'], 'event': (id)}
+        query = "DELETE FROM event_participants WHERE id = %(event_part)s;"
+        data = {'event_part': int(id)}
         del_reg = mysql.query_db(query, data)
     return redirect("/success")
 

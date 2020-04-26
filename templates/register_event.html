@@ -34,6 +34,7 @@
 
         #greeting {
             margin: 0px 420px 0px 20px;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 18pt;
             padding: 15px 0px 14px 0px;
             display: inline-block;
@@ -58,7 +59,7 @@
             width: 860px;
             display: inline-block;
             vertical-align: top;
-            padding: 10px 35px 10px 20px;
+            padding: 10px 35px 30px 20px;
             margin: 20px;
             background-color: rgb(146, 7, 7);
             color: white;
@@ -69,6 +70,7 @@
         }
 
         td {
+            width: 200px;
             padding: 6px;
             outline-width: 1px;
             outline-style: solid;
@@ -76,7 +78,6 @@
             background-color: white;
             color:black;
             font-size: 9pt;
-
         }
     </style>
     <title>Event Manager by Tweedy</title>
@@ -98,7 +99,6 @@
                         <th>Event Name</th>
                         <th>Event Date</th>
                         <th>Host</th>
-                        <th>Notes</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -107,7 +107,6 @@
                     <td>{{ event['event_name'] }}</td>
                     <td>{{ event['start_date'] }}</td>
                     <td>{{ event['host'] }}</td>
-                    <td>{{ event['notes'] }}</td>
                     <td>
                         <a href='/reg_event/{{event["id"]}}'>Register</a>
                     </td>
