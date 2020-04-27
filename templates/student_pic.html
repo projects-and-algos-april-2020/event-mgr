@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        /* * {
+        outline-style: solid;
+        outline-color: black;
+        outline-width: 1pt;
+    } */
+        #container {
+            width: 900px;
+            margin: 10px auto;
+            background-color: rgb(235, 235, 235);
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: black;
+        }
+
+        #greeting {
+            margin: 0px 400px 0px 30px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 18pt;
+            padding: 15px 0px 14px 0px;
+            display: inline-block;
+        }
+
+        #header {
+            width: 900px;
+            height: 50px;
+            display: block;
+            background-color: rgb(199, 199, 199);
+        }
+
+        #header a {
+            padding: 6px 6px 6px 6px;
+            margin: 10px 0px 0px 800px;
+            font-size: 9pt;
+        }
+
+        #header p {
+            font-size: 9pt;
+            display: inline-block;
+        }
+
+        div.reg_col_left {
+            width: 530px;
+            display: inline-block;
+            vertical-align: top;
+            padding: 30px 20px 20px 30px;
+            margin-left: 2px;
+            background-color: rgb(253, 232, 116);
+            color: black;
+        }
+
+        div.reg_col_right {
+            width: 362px;
+            display: inline-block;
+            vertical-align: top;
+            padding: 30px 20px 264px 30px;
+            margin-bottom: 2px;
+            background-color: rgb(253, 232, 116);
+            color: black;
+        }
+    </style>
+    <title>Event Manager by Tweedy</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <a href="/logout" type="submit" class="btn btn-primary">Logout</a>
+        </div>
+        <div id="greeting">Update My Picture</div>
+        <div class="reg_col_right">
+            <p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </p>
+            <form method="post" action="/upload" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                </dl>
+                <p>
+                    <input type="submit" value="Submit">
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

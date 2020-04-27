@@ -13,7 +13,7 @@
         outline-style: solid;
         outline-color: black;
         outline-width: 1pt;
-    }*/
+    } */
          #container {
             width: 900px;
             margin: 10px auto;
@@ -23,6 +23,14 @@
             outline-color: black;
         }
 
+        #greeting {
+            margin: 0px 400px 0px 30px;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 18pt;
+            padding: 15px 0px 14px 0px;
+            display: inline-block;
+        }
+
         #header {
             width: 900px;
             height: 50px;
@@ -30,19 +38,10 @@
             background-color: rgb(199, 199, 199);
         }
 
-        #greeting {
-            margin: 0px 0px 0px 30px;
-            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 18pt;
-            padding: 15px 0px 14px 0px;
-            display: inline-block;
-        }
-
         #header a {
-            padding: 6px 6px 6px 600px;
+            padding: 6px 6px 6px 6px;
+            margin:10px 0px 0px 800px;
             font-size: 9pt;
-            display: inline-block;
-            text-align: right;
         }
 
         #header p {
@@ -51,11 +50,20 @@
         }
 
         div.reg_col_left {
-            width: 860px;
+            width: 530px;
             display: inline-block;
             vertical-align: top;
-            padding: 30px 20px 10px 30px;
-            margin: 20px;
+            padding: 30px 20px 20px 30px;
+            margin-left: 2px;
+            background-color: rgb(253, 232, 116);
+            color: black;
+        }
+        div.reg_col_right {
+            width: 362px;
+            display: inline-block;
+            vertical-align: top;
+            padding: 30px 20px 264px 30px;
+            margin-bottom: 2px;
             background-color: rgb(253, 232, 116);
             color: black;
         }
@@ -67,70 +75,72 @@
 <body>
     <div id="container">
         <div id="header">
-
-            <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
+            <a href="/logout" type="submit" class="btn btn-primary">Logout</a>
         </div>
         <div id="greeting">Update My Account</div>
-        <div class="reg_col_left">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            {% for message in messages %}
-            <p>{{message}}</p>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-            <form action="/myaccount/{{user['id']}}" method='POST'>
-                <div class="form-group row">
-                    <label for="school_name" class="col-md-4 col-form-label">School Name</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="school_name" value="{{user['school_name']}}">
+            <div class="reg_col_left">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form action="/myaccount/{{user['id']}}" method='POST'>
+                    <div class="form-row">
+                        <label for="school_name" class="col-md-4 col-form-label">School Name</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control mb-2" name="school_name" value="{{user['school_name']}}">
+                            </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="first_name" class="col-md-4 col-form-label">First Name</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="first_name" value="{{user['first_name']}}">
+                    <div class="form-row">
+                        <label for="first_name" class="col-md-4 col-form-label">First Name</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-2" name="first_name" value="{{user['first_name']}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="last_name" class="col-md-4 col-form-label">Last Name</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="last_name" value="{{user['last_name']}}">
+                    <div class="form-row">
+                        <label for="last_name" class="col-md-4 col-form-label">Last Name</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-2" name="last_name" value="{{user['last_name']}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label">Email</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="email" value="{{ user['email']}}">
+                    <div class="form-row">
+                        <label for="email" class="col-md-4 col-form-label">Email</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-2" name="email" value="{{ user['email']}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="phone_number" class="col-md-4 col-form-label">Phone Number</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="phone_number" value="{{ user['phone_number']}}">
+                    <div class="form-row">
+                        <label for="phone_number" class="col-md-4 col-form-label">Phone Number</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-2" name="phone_number" value="{{ user['phone_number']}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="int_fb" class="col-md-4 col-form-label">Facebook API Key</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="int_fb" value="{{ user['int_fb']}}">
+                    <div class="form-row">
+                        <label for="int_fb" class="col-md-4 col-form-label">Facebook API Key</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-2" name="int_fb" value="{{ user['int_fb']}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="int_tw" class="col-md-4 col-form-label">Twitter API Key</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="int_tw" value="{{ user['int_tw']}}">
+                    <div class="form-row">
+                        <label for="int_tw" class="col-md-4 col-form-label">Twitter API Key</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-2" name="int_tw" value="{{ user['int_tw']}}">
+                        </div>
+                    </div><br>
+                    <div class="form-row">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-7">
+                            <input type="submit" class="btn btn-primary" value="Update">
+                            <a href="/success" type="submit" class="btn btn-primary">Cancel</a>
+                        </div>
                     </div>
+                </form>
+            </div>
+                <div class="reg_col_left">
+                    <a href='/update_pic'>Add or Update your Profile Picture.</a>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-8"></div>
-                    <div class="col-sm-3">
-                        <input type="submit" class="btn btn-outline-info" value="Update">
-            <a href="/success" type="submit" class="btn btn-outline-info">Cancel</a>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
 </body>
 

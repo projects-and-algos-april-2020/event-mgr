@@ -97,7 +97,7 @@
     <div id="container">
         <div id="header">
             <p></p>
-            <a href="/register_event" class="button">Register</a>
+            <a href="/register_event" class="button">Register for Events</a>
             <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
         </div>
         <div id="greeting">Welcome back {{ session['first_name'] }} {{ session['last_name'] }}!</div>
@@ -155,8 +155,6 @@
                     <td>{{ st_event['date_time'] }}</td>
                     <td>{{ st_event['host'] }}</td>
                     <td>
-                        <a href='#'>Facebook | </a>
-                        <a href='#'>Twitter | </a>
                         <a href="/cancel/{{st_event['id']}}" type="submit" class="button">Cancel Registration</a>
                     </td>
                 </tr>

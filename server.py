@@ -1,10 +1,20 @@
-from flask import Flask, render_template, request, redirect, session, flash
+import os
+from flask import Flask, render_template, request, redirect, session, flash, url_for
+from werkzeug.utils import secure_filename
 from flask_bcrypt import Bcrypt
 import re
 from datetime import datetime
 from mysqlconnection import connectToMySQL
+UPLOAD_FOLDER = 'C:/Users/traubhome/Desktop/Coding_Dojo/Projects and Algorithms/event-mgr/static/img/'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'My name is CJ and I quit'
 bcrypt = Bcrypt(app)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -13,6 +23,33 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 @app.route('/')
 def index():
         return render_template("index.html")
+    
+@app.route('/update_pic')
+def pic():
+        return render_template("student_pic.html")
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            mysql = connectToMySQL('event_manager')
+            query = "UPDATE student_accounts SET updated_at = NOW(), student_pic = %(pic_path)s WHERE id = %(sid)s"
+            data = {'pic_path': (app.config['UPLOAD_FOLDER'])+(filename), 'sid': session['user_id']}
+            pic_path_insert = mysql.query_db(query, data)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            flash('File successfully uploaded')
+            return redirect('/success')
 
 
 @app.route('/register_event')
@@ -20,12 +57,12 @@ def reg_valid():
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM student_accounts WHERE id = %(id)s;"
-    data = {'id': session['user_id']}
+    query = "SELECT * FROM student_accounts WHERE id = %(sid)s;"
+    data = {'sid': session['user_id']}
     reg_user = mysql.query_db(query, data)
     mysql = connectToMySQL('event_manager')
-    query = "SELECT id, event_name, start_date, host FROM events WHERE id NOT IN (SELECT event_id FROM event_participants WHERE student_account_id = %(uid)s)"
-    data = {'uid': session['user_id']}
+    query = "SELECT id, event_name, start_date, host FROM events WHERE id NOT IN (SELECT event_id FROM event_participants WHERE student_account_id = %(sid)s)"
+    data = {'sid': session['user_id']}
     reg_events = mysql.query_db(query, data)
     if reg_user and reg_user[0]['id'] == session['user_id']:
         return render_template("register_event.html", events=reg_events)
@@ -37,8 +74,8 @@ def account_valid(user_id):
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM student_accounts WHERE id = %(id)s"
-    data = {'id': session['user_id']}
+    query = "SELECT * FROM student_accounts WHERE id = %(sid)s"
+    data = {'sid': session['user_id']}
     this_user = mysql.query_db(query, data)
     if this_user and this_user[0]['id'] == session['user_id']:
         return render_template("update_student_acct.html", user=this_user[0])   
@@ -239,6 +276,24 @@ def edit_myaccount(user_id):
             return redirect(f'/myaccount/{user_id}')
         return redirect('/success')
 
+
+@app.route('/myaccount_pic/<user_id>', methods=['POST'])
+def edit_myaccount_pic(user_id):
+    mysql = connectToMySQL('event_manager')
+    query = "SELECT * FROM student_accounts WHERE id = %(user_id)s"
+    data = {"user_id": session["user_id"]}
+    edit_user_pic = mysql.query_db(query, data)
+    if edit_user_pic and edit_user_pic[0]['id'] == session['user_id']:
+        mysql = connectToMySQL('event_manager')
+        query = "INSERT INTO student_accounts SET student_pic = %(pic)s, created_at = NOW(), updated_at = NOW() WHERE id = %(user_id)s"
+        data = {
+            'pic': request.form['student_pic'],
+            'user_id': session['user_id']
+        }
+        insert_pic = mysql.query_db(query, data)
+    else:
+        return redirect(f'/myaccount/{user_id}')
+    return redirect('/success')
 
 @app.route('/cancel/<id>')
 def cancel_reg(id):
