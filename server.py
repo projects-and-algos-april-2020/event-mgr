@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 import re
 from datetime import datetime
 from mysqlconnection import connectToMySQL
-UPLOAD_FOLDER = 'C:/Users/traubhome/Desktop/Coding_Dojo/Projects and Algorithms/event-mgr/static/img/'
+UPLOAD_FOLDER = 'C:/Users/traubhome/Desktop/Coding_Dojo/Projects and Algorithms/event-mgr/static/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -45,7 +45,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             mysql = connectToMySQL('event_manager')
             query = "UPDATE student_accounts SET updated_at = NOW(), student_pic = %(pic_path)s WHERE id = %(sid)s"
-            data = {'pic_path': (app.config['UPLOAD_FOLDER'])+(filename), 'sid': session['user_id']}
+            data = {'pic_path': ('/static/')+(filename), 'sid': session['user_id']}
             pic_path_insert = mysql.query_db(query, data)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')
@@ -171,12 +171,12 @@ def ifgood():
     if 'user_id' not in session:
         return redirect('/')
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM student_accounts WHERE id = %(id)s;"
-    data = {'id': session['user_id']}
+    query = "SELECT * FROM student_accounts WHERE id = %(sid)s;"
+    data = {'sid': session['user_id']}
     st_acct = mysql.query_db(query, data)
     mysql = connectToMySQL('event_manager')
-    query = "SELECT * FROM event_participants WHERE student_account_id = %(id)s;"
-    data = {'id': session['user_id']}
+    query = "SELECT * FROM event_participants WHERE student_account_id = %(sid)s;"
+    data = {'sid': session['user_id']}
     st_events = mysql.query_db(query, data)
     return render_template("student_dashboard.html",  st_acct=st_acct, st_events=st_events)
 

@@ -103,14 +103,17 @@
         <div id="greeting">Welcome back {{ session['first_name'] }} {{ session['last_name'] }}!</div>
             <div class="reg_col_acct">
                 {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <p>{{message}}</p>
-                {% endfor %}
-                {% endif %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
                 {% endwith %}
                 <table>
                     <p>My Account Summary</p>
+                {% for st_acct in st_acct %}
+                <img src="{{st_acct['student_pic']}}" alt="Students picture" height="100" width="88">
+                {% endfor %}
                     <thead>
                         <tr>
                             <th>School Name</th>
@@ -122,6 +125,7 @@
                             <th>Twitter</th>
                         </tr>
                     </thead>
+                    
                     {% for st_acct in st_acct %}
                     <tr>
                         <td>{{ st_acct['school_name'] }}</td>
@@ -138,6 +142,7 @@
                     {% endfor %}
                 </table>
             </div>
+            <p></p>
             <div class="reg_col_myevents">
             <table>
             <p>My Upcoming Events</p>
