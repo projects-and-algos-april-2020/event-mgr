@@ -17,7 +17,7 @@
         #container {
             width: 900px;
             margin: 10px auto;
-            padding: 0px 30px 0px 0px;
+            padding: 0px 0px 0px 0px;
             background-color: rgb(235, 235, 235);
             outline-width: 1px;
             outline-style: solid;
@@ -27,7 +27,7 @@
         #header {
             width: 900px;
             height: 50px;
-            padding: 5px 0px 1px 10px;
+            padding: 5px 0px 1px 660px;
             display: block;
             background-color: rgb(199, 199, 199);
         }
@@ -35,7 +35,7 @@
         #greeting {
             margin: 0px 420px 0px 20px;
             font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 18pt;
+            font-size: 22pt;
             padding: 15px 0px 14px 0px;
             display: inline-block;
         }
@@ -44,51 +44,82 @@
             margin: 0px 0px 0px 20px;
             padding: 6px 6px 6px 6px;
             font-size: 9pt;
-            display: inline-block;
-            text-align: right;
         }
 
         #header p {
-            margin: 0px 600px 0px 0px;
+            margin: 0px 0px 0px 0px;
             padding: 6px 6px 6px 6px;
             font-size: 9pt;
             display: inline-block;
         }
 
         div.reg_col_acct {
-            width: 860px;
+            width: 400px;
             display: inline-block;
             vertical-align: top;
             padding: 10px 35px 10px 20px;
-            margin: 20px;
+            margin: 20px 5px 5px 10px;
             background-color: rgb(25, 60, 126);
+            color: white;
+            font-size: 9pt;
+        }
+
+        div.reg_col_acct a {
+            margin-left: 300px;
+            padding: 6px 24px 6px 24px;
             color: white;
         }
 
         div.reg_col_myevents {
-            width: 860px;
+            width: 470px;
             display: inline-block;
             vertical-align: top;
-            padding: 10px 35px 10px 20px;
-            margin: 20px;
+            padding: 10px 5px 10px 10px;
+            margin-top: 20px;
             background-color: rgb(27, 124, 27);
             color: white;
         }
 
+        div.pic {
+            background-color: rgb(59, 104, 177);
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: rgb(0, 0, 0);
+            margin-bottom: 20px;
+        }
+
+        div.pic a {
+            margin: 20px 0px 20px 0px;
+        }
+
+        div.pic img {
+            margin: 10px 30px 10px 40px;
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: rgb(0, 0, 0);
+        }
+
         th {
-            padding: 0px 0px 2px 8px;
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: rgb(0, 0, 0);
+            background-color: white;
+            color:black;
+            padding-left: 4px;
+            font-size: 10pt;
         }
 
         td {
-            padding: 0px 5px 0px 5px;
+            padding: 0px 2px 0px 2px;
             outline-width: 1px;
             outline-style: solid;
-            outline-color: rgb(27, 124, 27);
+            outline-color: rgb(0, 0, 0);
             background-color: white;
             color:black;
+            padding-left: 4px;
             font-size: 9pt;
-
         }
+
     </style>
     <title>Event Manager by Tweedy</title>
 </head>
@@ -96,7 +127,6 @@
 <body>
     <div id="container">
         <div id="header">
-            <p></p>
             <a href="/register_event" class="button">Register for Events</a>
             <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
         </div>
@@ -109,64 +139,71 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-                <table>
-                    <p>My Account Summary</p>
-                {% for st_acct in st_acct %}
-                <img src="{{st_acct['student_pic']}}" alt="Students picture" height="100" width="88">
-                {% endfor %}
-                    <thead>
-                        <tr>
-                            <th>School Name</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Phone No.</th>
-                            <th>Facebook</th>
-                            <th>Twitter</th>
-                        </tr>
-                    </thead>
-                    
+                <h4>Account Summary</h4>
                     {% for st_acct in st_acct %}
-                    <tr>
-                        <td>{{ st_acct['school_name'] }}</td>
-                        <td>{{ st_acct['first_name'] }}</td>
-                        <td>{{ st_acct['last_name'] }}</td>
-                        <td>{{ st_acct['email'] }}</td>
-                        <td>{{ st_acct['phone_number'] }}</td>
-                        <td>{{ st_acct['int_fb'] }}</td>
-                        <td>{{ st_acct['int_tw'] }}</td>
-                        <td>
-                        <a href="/update_acct/{{session['user_id']}}" class="button">Edit Account Settings</a>
-                        </td>
-                    </tr>
+                    <div class="pic">
+                        <img src="{{st_acct['student_pic']}}" alt="Students picture" height="160" width="148">
+                        <a href='/update_pic' class="btn btn-primary">Edit</a>
+                    </div>
                     {% endfor %}
+                    {% for st_acct in st_acct %}
+                <form class="form" action="/action_page.php">
+                    <div class="input-group-sm">
+                        <label for="school_name" class="mr-sm-1">School Name</label>
+                        <input type="text" class="form-control mb-1 mr-sm-1" value="{{ st_acct['school_name'] }}">
+                    </div>
+                    <div class="input-group-sm">
+                        <label for="first_name" class="mr-sm-1">First Name</label>
+                        <input type="text" class="form-control mb-1 mr-sm-1" value="{{ st_acct['first_name'] }}">
+                    </div>
+                    <div class="input-group-sm">
+                        <label for="last_name" class="mr-sm-1">Last Name</label>
+                        <input type="text" class="form-control mb-1 mr-sm-1" value="{{ st_acct['last_name'] }}">
+                    </div>
+                    <div class="input-group-sm">
+                        <label for="email" class="mr-sm-1">Email</label>
+                        <input type="email" class="form-control mb-1 mr-sm-1" value="{{ st_acct['email'] }}">
+                    </div>
+                    <div class="input-group-sm">
+                        <label for="phone_number" class="mr-sm-1">Phone Number</label>
+                        <input type="tel" class="form-control mb-1 mr-sm-1" value="{{ st_acct['phone_number'] }}">
+                    </div>
+                    <div class="input-group-sm">
+                        <label for="int_fb" class="mr-sm-1">Facebook</label>
+                        <input type="text" class="form-control mb-1 mr-sm-1" value="{{ st_acct['int_fb'] }}">
+                    </div>
+                    <div class="input-group-sm">
+                        <label for="int_tw" class="mr-sm-1">Twitter</label>
+                        <input type="text" class="form-control mb-1 mr-sm-1" value="{{ st_acct['int_tw'] }}">
+                    </div><br>
+                        <a href="/update_acct/{{session['user_id']}}" class="btn btn-primary">Edit</a>
+                </form>
+                {% endfor %}
+            </div>
+            <div class="reg_col_myevents">
+                <table>
+                    <h4>Upcoming Events</h4>
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Date & Time</th>
+                                <th>Host</th>
+                                <th>Updates</th>
+                            </tr>
+                        </thead>
+                        {% for st_event in st_events %}
+                            <tr>
+                                <td>{{ st_event['event'] }}</td>
+                                <td>{{ st_event['date_time'] }}</td>
+                                <td>{{ st_event['host'] }}</td>
+                                <td>
+                                <a href="/cancel/{{st_event['id']}}" type="submit" class="button">Cancel Registration</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                 </table>
             </div>
-            <p></p>
-            <div class="reg_col_myevents">
-            <table>
-            <p>My Upcoming Events</p>
-                <thead>
-                    <tr>
-                        <th>Event Name</th>
-                        <th>Date and Time</th>
-                        <th>Host</th>
-                        <th>Event Updates</th>
-                    </tr>
-                </thead>
-                {% for st_event in st_events %}
-                <tr>
-                    <td>{{ st_event['event'] }}</td>
-                    <td>{{ st_event['date_time'] }}</td>
-                    <td>{{ st_event['host'] }}</td>
-                    <td>
-                        <a href="/cancel/{{st_event['id']}}" type="submit" class="button">Cancel Registration</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
         </div>
-    </div>
 </body>
 
 </html>

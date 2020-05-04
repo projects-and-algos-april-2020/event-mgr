@@ -17,6 +17,7 @@
          #container {
             width: 900px;
             margin: 10px auto;
+            padding: 0px 30px 0px 0px;
             background-color: rgb(235, 235, 235);
             outline-width: 1px;
             outline-style: solid;
@@ -36,17 +37,17 @@
             height: 50px;
             display: block;
             background-color: rgb(199, 199, 199);
+            padding: 6px 6px 6px 636px;
+            margin: 10px 0px 0px 0px;
+            font-size: 9pt;
         }
 
         #header a {
+            margin: 0px 0px 0px 20px;
             padding: 6px 6px 6px 6px;
-            margin:10px 0px 0px 800px;
-            font-size: 9pt;
-        }
-
-        #header p {
             font-size: 9pt;
             display: inline-block;
+            text-align: right;
         }
 
         div.reg_col_left {
@@ -55,19 +56,19 @@
             vertical-align: top;
             padding: 30px 20px 20px 30px;
             margin-left: 2px;
+            margin-bottom: 2px;
             background-color: rgb(253, 232, 116);
             color: black;
         }
         div.reg_col_right {
             width: 362px;
             display: inline-block;
-            vertical-align: top;
             padding: 30px 20px 264px 30px;
             margin-bottom: 2px;
+            margin-top: 68px;
             background-color: rgb(253, 232, 116);
             color: black;
         }
-
     </style>
     <title>Event Manager by Tweedy</title>
 </head>
@@ -75,7 +76,8 @@
 <body>
     <div id="container">
         <div id="header">
-            <a href="/logout" type="submit" class="btn btn-primary">Logout</a>
+            <a href="/success" class="button">Account Summary</a>
+            <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
         </div>
         <div id="greeting">Update My Account</div>
             <div class="reg_col_left">
@@ -138,9 +140,9 @@
                     </div>
                 </form>
             </div>
-                <div class="reg_col_left">
-                    <a href='/update_pic'>Add or Update your Profile Picture.</a>
-                </div>
+            <div class="reg_col_right">
+                <a href='/update_pic'>Add or Update your Profile Picture</a>
+            </div>
     </div>
 </body>
 

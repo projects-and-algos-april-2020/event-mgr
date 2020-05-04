@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
-        /* * {
+     /* * {
         outline-style: solid;
         outline-color: black;
         outline-width: 1pt;
     } */
         #container {
-            width: 900px;
+            width: 440px;
             margin: 10px auto;
             background-color: rgb(235, 235, 235);
             outline-width: 1px;
@@ -24,7 +24,7 @@
         }
 
         #greeting {
-            margin: 0px 400px 0px 30px;
+            margin: 10px 0px 10px 30px;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 18pt;
             padding: 15px 0px 14px 0px;
@@ -32,29 +32,30 @@
         }
 
         #header {
-            width: 900px;
+            width: 440px;
             height: 50px;
             display: block;
             background-color: rgb(199, 199, 199);
         }
 
-        #header a {
-            padding: 6px 6px 6px 6px;
-            margin: 10px 0px 0px 800px;
+        #header{
+            padding: 6px 6px 6px 220px;
+            margin: 10px 0px 0px 0px;
             font-size: 9pt;
         }
-
-        #header p {
+        #header a {
+            margin: 0px 0px 0px 20px;
+            padding: 6px 6px 6px 6px;
             font-size: 9pt;
             display: inline-block;
+            text-align: right;
         }
-
+        
         div.reg_col_left {
-            width: 530px;
+            width: 440px;
             display: inline-block;
             vertical-align: top;
-            padding: 30px 20px 20px 30px;
-            margin-left: 2px;
+            padding: 10px 20px 20px 30px;
             background-color: rgb(253, 232, 116);
             color: black;
         }
@@ -75,10 +76,11 @@
 <body>
     <div id="container">
         <div id="header">
+            <a href="/success" class="button">Account Summary</a>
             <a href="/logout" type="submit" class="btn btn-primary">Logout</a>
         </div>
         <div id="greeting">Update My Picture</div>
-        <div class="reg_col_right">
+        <div class="reg_col_left">
             <p>
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -96,8 +98,10 @@
                         <input type="file" name="file" autocomplete="off" required>
                     </p>
                 </dl>
+                <br>
                 <p>
                     <input type="submit" value="Submit">
+                    <a href="/success" class="button">Cancel</a>
                 </p>
             </form>
         </div>

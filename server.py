@@ -196,30 +196,6 @@ def add_regevent(id):
     return redirect("/success")
 
 
-# @app.route('/like/<id>')
-# def add_like(id):
-#     mysql = connectToMySQL('event_manager')
-#     query = "UPDATE quotes SET likes = likes + 1 WHERE id = %(quote_id)s"
-#     data = {'quote_id': (id)}
-#     result = mysql.query_db(query, data)
-#     return redirect('/success')
-
-
-# @app.route('/user/<id>')
-# def user_quotes(id):
-#     if 'user_id' not in session:
-#         return redirect('/')
-#     mysql = connectToMySQL('event_manager')
-#     query = "SELECT id, first_name, last_name FROM users WHERE id = %(user_id)s"
-#     data = {'user_id': session['user_id']}
-#     user = mysql.query_db(query, data)
-#     mysql = connectToMySQL('event_manager')
-#     query = "SELECT quotes.user_id AS 'usrID', quotes.author AS 'author', quotes.quote AS 'quote', users.first_name AS 'first_name', users.last_name AS 'last_name' FROM quotes JOIN users ON quotes.user_id = users.id WHERE user_id = %(user_id)s"
-#     data = {'user_id': int(id)}
-#     quotes = mysql.query_db(query, data)
-#     return render_template("user_quotes.html", user=user, quotes=quotes)
-
-
 @app.route('/myaccount/<user_id>', methods=['POST'])
 def edit_myaccount(user_id):
     mysql = connectToMySQL('event_manager')
