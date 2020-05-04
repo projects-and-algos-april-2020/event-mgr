@@ -15,7 +15,7 @@
         outline-width: 1pt;
     }*/
         #container {
-            width: 900px;
+            width: 1100px;
             margin: 10px auto;
             padding: 0px 0px 0px 0px;
             background-color: rgb(235, 235, 235);
@@ -25,9 +25,9 @@
         }
 
         #header {
-            width: 900px;
+            width: 1100px;
             height: 50px;
-            padding: 5px 0px 1px 660px;
+            padding: 5px 0px 1px 830px;
             display: block;
             background-color: rgb(199, 199, 199);
         }
@@ -71,11 +71,11 @@
         }
 
         div.reg_col_myevents {
-            width: 470px;
+            width: 640px;
             display: inline-block;
             vertical-align: top;
             padding: 10px 5px 10px 10px;
-            margin-top: 20px;
+            margin: 20px 20px 0px 20px;
             background-color: rgb(27, 124, 27);
             color: white;
         }
@@ -100,6 +100,7 @@
         }
 
         th {
+            padding: 0px 60px 0px 2px;
             outline-width: 1px;
             outline-style: solid;
             outline-color: rgb(0, 0, 0);
@@ -110,13 +111,12 @@
         }
 
         td {
-            padding: 0px 2px 0px 2px;
+            padding: 0px 20px 0px 2px;
             outline-width: 1px;
             outline-style: solid;
             outline-color: rgb(0, 0, 0);
             background-color: white;
             color:black;
-            padding-left: 4px;
             font-size: 9pt;
         }
 
@@ -130,7 +130,7 @@
             <a href="/register_event" class="button">Register for Events</a>
             <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
         </div>
-        <div id="greeting">Welcome back {{ session['first_name'] }} {{ session['last_name'] }}!</div>
+        <div id="greeting">Welcome {{ session['first_name'] }} {{ session['last_name'] }}!</div>
             <div class="reg_col_acct">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -142,12 +142,12 @@
                 <h4>Account Summary</h4>
                     {% for st_acct in st_acct %}
                     <div class="pic">
-                        <img src="{{st_acct['student_pic']}}" alt="Students picture" height="160" width="148">
+                        <img src="{{st_acct['student_pic']}}" alt="Students profile picture." height="160" width="148">
                         <a href='/update_pic' class="btn btn-primary">Edit</a>
                     </div>
                     {% endfor %}
                     {% for st_acct in st_acct %}
-                <form class="form" action="/action_page.php">
+                <form class="form" action="/#">
                     <div class="input-group-sm">
                         <label for="school_name" class="mr-sm-1">School Name</label>
                         <input type="text" class="form-control mb-1 mr-sm-1" value="{{ st_acct['school_name'] }}">

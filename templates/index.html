@@ -18,12 +18,12 @@
         outline-width: 1pt;
     }*/
         #wrapper {
-            width: 900px;
+            width: 1000px;
             margin: 0px auto;
         }
 
         div.col_top {
-            width: 900px;
+            width: 1000px;
             display: inline-block;
             vertical-align: top;
         }
@@ -37,7 +37,7 @@
         }
 
         div.reg_col_left {
-            width: 900px;
+            width: 1000px;
             display: inline-block;
             vertical-align: top;
             padding: 20px 25px 0px 34px;
@@ -48,7 +48,7 @@
         }
 
         div.reg_col_right {
-            width: 900px;
+            width: 1000px;
             display: inline-block;
             vertical-align: top;
             padding: 20px 25px 0px 34px;
@@ -57,6 +57,11 @@
             border-radius: 20px;
             margin: 10px 15px 0px 0px;
         }
+
+        h3 {
+            color:rgb(12, 219, 12);
+        }
+
     </style>
     <title>Event Manager by Tweedy</title>
 </head>
@@ -65,16 +70,13 @@
     <div id="wrapper">
         <div class="container">
             <div class="jumbotron jumbotron-fluid">
-                <div class="jumbo_content">
-                    <h3 style="color:rgb(12, 219, 12);"><img src="static/capital.PNG" alt="1000MODS">Welcome to the Student Event Manager portal by TWEEDY
-                    </h3>
-                    <h4>Let's get started!</h4>
+                <div class="jumbo_content">      
+                    <h3>Welcome to the Student Event Manager portal by TWEEDY</h3>
+                    <h4><img src="static/img/find-college.png" alt="1000MODS">Let's get started!</h4>
                 </div>
             </div>
-
-                <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#demo">New Users Register Here</button>
-                <div id="demo" class="collapse">
-
+                <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#newreg">New Users Register Here</button>
+                    <div id="newreg" class="collapse">
                         <h5>New Users Register Here</h5><br>
                         <form action="/save_user" method='POST'>
                             <div class="form-group row">
@@ -113,16 +115,18 @@
                                     <input type="password" class="form-control" name="passwordcon">
                                 </div>
                             </div>
-                            </div>
-                            <br>
                             <div class="form-group row">
-                                <div class="col-sm-8"></div>
-                                <div class="col-sm-3">
-                                    <input type="submit" color class="btn btn-warning" value="Register">
+                                <div class="col-sm-8">
+                                    <div class="col-sm-3">
+                                        <input type="submit" color class="btn btn-warning" value="Register">
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
+<br>
+<br>
+<br>
 
         <div class="reg_col_left">
             {% with messages = get_flashed_messages() %}
