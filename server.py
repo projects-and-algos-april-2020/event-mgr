@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 import re
 from datetime import datetime
 from mysqlconnection import connectToMySQL
-UPLOAD_FOLDER = 'C:/Users/traubhome/Desktop/Coding_Dojo/Projects and Algorithms/event-mgr/static/'
+UPLOAD_FOLDER = '.static/img/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -15,6 +15,7 @@ def allowed_file(filename):
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.secret_key = 'My name is CJ and I quit'
 bcrypt = Bcrypt(app)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -45,7 +46,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             mysql = connectToMySQL('event_manager')
             query = "UPDATE student_accounts SET updated_at = NOW(), student_pic = %(pic_path)s WHERE id = %(sid)s"
-            data = {'pic_path': ('/static/')+(filename), 'sid': session['user_id']}
+            data = {'pic_path': (app.config['UPLOAD_FOLDER'], +(filename), 'sid': session['user_id']}
             pic_path_insert = mysql.query_db(query, data)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')
