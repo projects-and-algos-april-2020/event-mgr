@@ -44,9 +44,10 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            filepath = (app.config['UPLOAD_FOLDER'])
             mysql = connectToMySQL('event_manager')
             query = "UPDATE student_accounts SET updated_at = NOW(), student_pic = %(pic_path)s WHERE id = %(sid)s"
-            data = {'pic_path': (app.config['UPLOAD_FOLDER'], +(filename), 'sid': session['user_id']}
+            data = {'pic_path': (filepath) + (filename), 'sid': session['user_id']}
             pic_path_insert = mysql.query_db(query, data)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')

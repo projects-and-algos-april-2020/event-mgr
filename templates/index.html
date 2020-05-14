@@ -12,36 +12,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"> </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-        /* * {
+         /* * {
         outline-style: solid;
         outline-color: black;
         outline-width: 1pt;
-    }*/
-        #wrapper {
+    } */
+        #container{
             width: 1000px;
             margin: 0px auto;
         }
-
-        div.col_top {
+        .top-box{
             width: 1000px;
-            display: inline-block;
-            vertical-align: top;
+            margin-bottom: 20px;
+        }
+        img{
+            display: inline;
+            margin-inline-end: 100px;
+            margin-inline-start: 40px;
         }
 
-        div.jumbo_content {
-            padding: 0px 60px 0px 60px;
-            margin: 0px 0px 0px 0px;
+         h2{
+            color:rgb(75, 172, 75);
+            display: inline;
         }
 
-        div.jumbo_content h4{
-            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            outline-style: solid;
-            outline-color: black;
-            outline-width: 1pt;
-            background-color: #d3d6da;
-        }
-
-        div.reg_col_left {
+        div .reg_col_left {
             width: 600px;
             display: inline-block;
             vertical-align: top;
@@ -52,36 +47,35 @@
             margin: -40px 15px 0px 0px;
         }
 
-        div#newreg {
-            width: 800px;
+        div #newreg {
+            width: 600px;
             padding: 20px 25px 0px 34px;
             background-color: rgb(14, 103, 158);
             color: white;
             border-radius: 20px;
-            margin: -40px 15px 0px 0px;
+            margin: 40px 15px 20px 0px;
         }
 
-        h3 {
-            color:rgb(75, 172, 75);
-        }
-        
         div.col-sm-3{
-            padding-left: 500px;
+            padding-left: 410px;
+            margin-bottom: 20px;
+        }
+
+        div.col-sm-1{
+            padding-left: 440px;
+            margin-bottom: 10px;
         }
 
 
     </style>
-    <title>Event Manager by Tweedy</title>
+    <title>Student Event Manager</title>
 </head>
 
 <body>
-    <div id="wrapper">
-        <div class="container">
-
-                    <h3>Welcome to the Student Event Manager portal by TWEEDY</h3>
-                    <h4><img src="static/img/find-college.png" alt="1000MODS">Let's get started!</h4>
-
-                <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#newreg">New Users Register Here</button>
+        <div id="container">
+            <div id="top-box">
+                <img src="static/img/find-college.png" alt="1000mods">
+                <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#newreg">New Users Register Here</button></div>
                     <div id="newreg" class="collapse">
                         <form action="/save_user" method='POST'>
                             <div class="form-group row">
@@ -131,8 +125,6 @@
                     </div>
 <br>
 <br>
-<br>
-
         <div class="reg_col_left">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
