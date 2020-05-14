@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 import re
 from datetime import datetime
 from mysqlconnection import connectToMySQL
-UPLOAD_FOLDER = '.static/img/'
+UPLOAD_FOLDER = 'static/img/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -87,9 +87,6 @@ def account_valid(user_id):
 @app.route('/save_user', methods=['POST'])
 def add_user():
     is_valid = True     # assume True
-    if len(request.form['school_name']) < 2:
-        flash("Please enter a school name at least 2 characters long.")
-        is_valid = False
     if len(request.form['first_name']) < 2:
         flash("Please enter a first name at least 2 characters long.")
         is_valid = False
@@ -127,9 +124,8 @@ def add_user():
         return redirect('/')
     if is_valid:
         mysql = connectToMySQL('event_manager')
-        query = "INSERT INTO student_accounts (school_name, first_name, last_name, email, password, created_at, updated_at) VALUES (%(school)s,%(fn)s, %(ln)s, %(em)s, %(password_hash)s, NOW(), NOW())"
+        query = "INSERT INTO student_accounts (first_name, last_name, email, password, created_at, updated_at) VALUES (%(fn)s, %(ln)s, %(em)s, %(password_hash)s, NOW(), NOW())"
         data = {
-            'school': request.form['school_name'],
             'fn': request.form['first_name'],
             'ln': request.form['last_name'],
             'em': request.form['email'],

@@ -12,42 +12,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"> </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-         /* * {
-        outline-style: solid;
-        outline-color: black;
-        outline-width: 1pt;
-    } */
-        #container{
-            width: 1000px;
-            margin: 0px auto;
+
+        .container{
+            width: 600px;
+            margin: 40px auto;
         }
-        .top-box{
-            width: 1000px;
-            margin-bottom: 20px;
+
+        #top-box{
+            width: 600px;
+            margin-bottom: 10px;
+            padding: 16px 0px 10px 0px;
+            background-color: rgb(75, 172, 75);
+            color: white;
+            border-radius: 10px;
         }
         img{
             display: inline;
-            margin-inline-end: 100px;
-            margin-inline-start: 40px;
+            margin-inline-start: 50px;
+            margin-inline-end: 20px;
         }
 
-         h2{
-            color:rgb(75, 172, 75);
+         h4{
+            color: white;
+             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             display: inline;
         }
 
-        div .reg_col_left {
-            width: 600px;
-            display: inline-block;
-            vertical-align: top;
-            padding: 20px 25px 0px 34px;
-            background-color: rgb(14, 103, 158);
-            color: white;
-            border-radius: 20px;
-            margin: -40px 15px 0px 0px;
-        }
-
-        div #newreg {
+        div #left {
             width: 600px;
             padding: 20px 25px 0px 34px;
             background-color: rgb(14, 103, 158);
@@ -56,84 +47,88 @@
             margin: 40px 15px 20px 0px;
         }
 
+        div #newreg {
+            width: 600px;
+            padding: 20px 25px 0px 34px;
+            background-color: rgb(14, 103, 158);
+            color: white;
+            border-radius: 20px;
+            margin: -40px 55px 20px 0px;
+        }
+
+        div.col-sm-1{
+            padding-left: 460px;
+            margin-bottom: 10px;
+        }
+
         div.col-sm-3{
             padding-left: 410px;
             margin-bottom: 20px;
         }
-
-        div.col-sm-1{
-            padding-left: 440px;
-            margin-bottom: 10px;
-        }
-
 
     </style>
     <title>Student Event Manager</title>
 </head>
 
 <body>
-        <div id="container">
-            <div id="top-box">
-                <img src="static/img/find-college.png" alt="1000mods">
-                <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#newreg">New Users Register Here</button></div>
-                    <div id="newreg" class="collapse">
-                        <form action="/save_user" method='POST'>
-                            <div class="form-group row">
-                                <label for="school_name" class="col-lg-4 col-form-label">School Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="school_name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="first_name" class="col-lg-4 col-form-label">First Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="first_name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="last_name" class="col-lg-4 col-form-label">Last Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="last_name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="email" class="col-lg-4 col-form-label">Email</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-lg-4 col-form-label">Password</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="passwordcon" class="col-lg-4 col-form-label">Confirm Pass</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" name="passwordcon">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-8">
-                                    <div class="col-sm-3">
-                                        <input type="submit" color class="btn btn-warning" value="Register">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-<br>
-<br>
-        <div class="reg_col_left">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
+    <div class="container">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        {% for message in messages %}
                         <p>{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <h5>Student Login</h5><br>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+        <div id="top-box">
+            <img src="static/img/find-college.png" height="40" alt="1000mods"><h4>Welcome to Student Event Manager!</h4>
+        </div>
+        <button data-toggle="collapse"  class="btn btn-warning"  data-target="#newreg">New Users Register Here</button>
+        <div id="newreg" class="collapse">
+            <form action="/save_user" method='POST'>
+                <div class="form-group row">
+                    <label for="first_name" class="col-lg-4 col-form-label">First Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="first_name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="last_name" class="col-lg-4 col-form-label">Last Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="last_name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-lg-4 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-lg-4 col-form-label">Password</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passwordcon" class="col-lg-4 col-form-label">Confirm Pass</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="passwordcon">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-8">
+                        <div class="col-sm-3">
+                            <input type="submit" color class="btn btn-warning" value="Register">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button data-toggle="collapse" class="btn btn-warning"  data-target="#left">Student Login</button>
+                <br>
+                <br>
+                <br>
+        <div id="left" class="collapse">
             <form action="/login" method='POST'>
                 <div class="form-group row">
                     <label for="email" class="col-sm-4 col-form-label">Email</label>
@@ -147,11 +142,11 @@
                         <input type="password" class="form-control" name="password">
                     </div>
                 </div>
-                <br>
                 <div class="form-group row">
-                    <div class="col-sm-8"></div>
-                    <div class="col-sm-1">
-                        <input type="submit" class="btn btn-warning" value="Login">
+                    <div class="col-sm-8">
+                        <div class="col-sm-3">
+                            <input type="submit" class="btn btn-warning" value="Login">
+                        </div>
                     </div>
                 </div>
             </form>
