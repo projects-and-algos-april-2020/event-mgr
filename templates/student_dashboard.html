@@ -17,8 +17,7 @@
         #container {
             width: 1100px;
             margin: 10px auto;
-            padding: 0px 0px 0px 0px;
-            background-color: rgb(235, 235, 235);
+            background-color: rgb(112, 112, 112);
             outline-width: 1px;
             outline-style: solid;
             outline-color: black;
@@ -26,31 +25,26 @@
 
         #header {
             width: 1100px;
-            height: 50px;
-            padding: 5px 0px 1px 830px;
+            height: 70px;
+            padding: 4px 0px 1px 60px;
             display: block;
-            background-color: rgb(199, 199, 199);
+            background-color: rgb(182, 182, 182);
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: black;
         }
 
-        #greeting {
-            margin: 0px 740px 0px 20px;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 22pt;
-            padding: 15px 0px 14px 0px;
+        #header p {
+            font-size: 18pt;
+            padding-right: 600px;
+            margin-top: 8px;
             display: inline-block;
         }
 
         #header a {
             margin: 0px 0px 0px 20px;
-            padding: 6px 6px 6px 6px;
-            font-size: 9pt;
-        }
-
-        #header p {
-            margin: 0px 0px 0px 0px;
-            padding: 6px 6px 6px 6px;
-            font-size: 9pt;
-            display: inline-block;
+            padding: 4px 6px 6px 6px;
+            font-size: 14pt;
         }
 
         div.reg_col_acct {
@@ -115,16 +109,16 @@
         }
 
     </style>
-    <title>Event Manager by Tweedy</title>
+    <title>Event Manager</title>
 </head>
 
 <body>
     <div id="container">
         <div id="header">
-            <a href="/register_event" class="button">Register for Events</a>
-            <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
+            <p>{{ session['first_name'] }} {{ session['last_name'] }}</p>
+            <a href="/register_event" class="btn btn-outline-light text-dark">Register for Events</a>
+            <a href="/logout" type="submit" class="btn btn-outline-light text-dark">Logout</a>
         </div>
-        <div id="greeting">Welcome {{ session['first_name'] }} {{ session['last_name'] }}!</div>
             <div class="reg_col_acct">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}

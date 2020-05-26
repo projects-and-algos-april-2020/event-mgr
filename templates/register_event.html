@@ -16,9 +16,8 @@
     }*/
         #container {
             width: 1100px;
-            margin: 10px auto;
-            padding: 0px 0px 0px 0px;
-            background-color: rgb(235, 235, 235);
+            margin: 14px auto;
+            background-color: rgb(112, 112, 112);
             outline-width: 1px;
             outline-style: solid;
             outline-color: black;
@@ -26,85 +25,89 @@
 
         #header {
             width: 1100px;
-            height: 50px;
-            padding: 5px 0px 1px 830px;
+            height: 70px;
+            padding: 10px 0px 1px 800px;
             display: block;
-            background-color: rgb(199, 199, 199);
-        }
-
-        #greeting {
-            margin: 0px 420px 0px 20px;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 22pt;
-            padding: 15px 0px 14px 0px;
-            display: inline-block;
+            background-color: rgb(182, 182, 182);
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: black;
         }
 
         #header a {
             margin: 0px 0px 0px 20px;
             padding: 6px 6px 6px 6px;
-            font-size: 9pt;
-        }
-
-        #header p {
-            margin: 0px 0px 0px 0px;
-            padding: 6px 6px 6px 6px;
-            font-size: 9pt;
-            display: inline-block;
+            font-size: 14pt;
+            color: rgb(146, 7, 7);
+        
         }
 
         div.reg_col_myevents {
-            width: 1000px;
+            width: 1080px;
             display: inline-block;
             vertical-align: top;
             padding: 10px 35px 30px 20px;
-            margin: 20px;
+            margin: 10px;
             background-color: rgb(146, 7, 7);
             color: white;
         }
 
         th {
             padding: 0px 0px 2px 4px;
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: black;
+            background-color: white;
+            color:black;
         }
 
-        td {
+        tr {
+            width: 920px;
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: black;
+            background-color: white;
+            color:black;
+        }
+
+        td.medium{
             width: 200px;
             padding: 6px;
             outline-width: 1px;
             outline-style: solid;
-            outline-color: rgb(17, 85, 17);
-            background-color: white;
+            outline-color: black;
             color:black;
             font-size: 9pt;
         }
+
     </style>
-    <title>Event Manager by Tweedy</title>
+    <title>Event Manager</title>
 </head>
 
 <body>
     <div id="container">
         <div id="header">
-            <p></p>
-            <a href="/success" class="button">Account Summary</a>
-            <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
+            <a href="/success" class="btn btn-outline-light text-dark">Account Summary</a>
+            <a href="/logout" type="submit" class="btn btn-outline-light text-dark">Logout</a>
         </div>
-        <div id="greeting">Hello {{ session['first_name'] }}, event registration is easy.</div>
         <div class="reg_col_myevents">
             <table>
-                <p>Upcoming Events</p>
+                <h3>Upcoming Events</h3>
                 <thead>
                     <tr>
-                        <th>Event Name</th>
-                        <th>Event Date</th>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Time</th>
                         <th>Host</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 {% for event in events %}
                 <tr>
-                    <td>{{ event['event_name'] }}</td>
-                    <td>{{ event['start_date'] }}</td>
-                    <td>{{ event['host'] }}</td>
+                    <td class="medium">{{ event['event_name'] }}</td>
+                    <td class="medium">{{ event['start_date'] }}</td>
+                    <td>{{ event['start_time'] }}</td>
+                    <td class="medium">{{ event['host'] }}</td>
                     <td>
                         <a href='/reg_event/{{event["id"]}}'>Register</a>
                     </td>

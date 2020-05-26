@@ -63,7 +63,7 @@ def reg_valid():
     data = {'sid': session['user_id']}
     reg_user = mysql.query_db(query, data)
     mysql = connectToMySQL('event_manager')
-    query = "SELECT id, event_name, start_date, host FROM events WHERE id NOT IN (SELECT event_id FROM event_participants WHERE student_account_id = %(sid)s)"
+    query = "SELECT id, event_name, start_time, start_date, host FROM events WHERE id NOT IN (SELECT event_id FROM event_participants WHERE student_account_id = %(sid)s)"
     data = {'sid': session['user_id']}
     reg_events = mysql.query_db(query, data)
     if reg_user and reg_user[0]['id'] == session['user_id']:
