@@ -52,6 +52,9 @@
             color: white;
         }
 
+        table {
+            width: 1040px;
+        }
         th {
             padding: 0px 0px 2px 4px;
             outline-width: 1px;
@@ -70,14 +73,24 @@
             color:black;
         }
 
-        td.medium{
-            width: 200px;
+        td{
+            width: 100px;
             padding: 6px;
             outline-width: 1px;
             outline-style: solid;
             outline-color: black;
             color:black;
-            font-size: 9pt;
+            font-size: 11pt;
+        }
+
+        td.medium{
+            width: 260px;
+            padding: 6px;
+            outline-width: 1px;
+            outline-style: solid;
+            outline-color: black;
+            color:black;
+            font-size: 11pt;
         }
 
     </style>
@@ -105,7 +118,7 @@
                 {% for event in events %}
                 <tr>
                     <td class="medium">{{ event['event_name'] }}</td>
-                    <td class="medium">{{ event['start_date'] }}</td>
+                    <td>{{ event['start_date'] }}</td>
                     <td>{{ event['start_time'] }}</td>
                     <td class="medium">{{ event['host'] }}</td>
                     <td>

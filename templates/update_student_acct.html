@@ -15,59 +15,50 @@
         outline-width: 1pt;
     } */
          #container {
-            width: 900px;
+            width: 1100px;
             margin: 10px auto;
-            padding: 0px 30px 0px 0px;
-            background-color: rgb(235, 235, 235);
+            background-color: rgb(112, 112, 112);
             outline-width: 1px;
             outline-style: solid;
             outline-color: black;
         }
 
-        #greeting {
-            margin: 0px 400px 0px 30px;
-            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 18pt;
-            padding: 15px 0px 14px 0px;
-            display: inline-block;
-        }
-
         #header {
-            width: 900px;
-            height: 50px;
+            width: 1100px;
+            height: 70px;
             display: block;
-            background-color: rgb(199, 199, 199);
-            padding: 6px 6px 6px 636px;
+            background-color: rgb(182, 182, 182);
+            padding: 16px 6px 6px 812px;
             margin: 10px 0px 0px 0px;
             font-size: 9pt;
         }
 
         #header a {
             margin: 0px 0px 0px 20px;
-            padding: 6px 6px 6px 6px;
-            font-size: 9pt;
-            display: inline-block;
-            text-align: right;
+            padding: 4px 6px 6px 6px;
+            font-size: 14pt;
         }
 
         div.reg_col_left {
-            width: 530px;
+            width: 538px;
             display: inline-block;
             vertical-align: top;
-            padding: 30px 20px 20px 30px;
-            margin-left: 2px;
-            margin-bottom: 2px;
+            padding: 20px 20px 14px 30px;
+            margin: 6px 3px 6px 6px;
             background-color: rgb(253, 232, 116);
             color: black;
         }
         div.reg_col_right {
-            width: 362px;
+            width: 538px;
             display: inline-block;
-            padding: 30px 20px 264px 30px;
-            margin-bottom: 2px;
-            margin-top: 68px;
+            padding: 20px 20px 20px 20px;
+            margin: 6px 6px 6px 3px;
             background-color: rgb(253, 232, 116);
             color: black;
+        }
+
+        h4 {
+            color: cornflowerblue;
         }
     </style>
     <title>Event Manager by Tweedy</title>
@@ -76,10 +67,10 @@
 <body>
     <div id="container">
         <div id="header">
-            <a href="/success" class="button">Account Summary</a>
-            <a href="/logout" type="submit" class="btn btn-outline-primary">Logout</a>
+            <a href="/success" class="btn btn-outline-light text-dark">Account Summary</a>
+            <a href="/logout" type="submit" class="btn btn-outline-light text-dark">Logout</a>
         </div>
-        <div id="greeting">Update My Account</div>
+
             <div class="reg_col_left">
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -88,6 +79,7 @@
                 {% endfor %}
                 {% endif %}
                 {% endwith %}
+                <h4>Account Summary Update</h4><br>
                 <form action="/myaccount/{{user['id']}}" method='POST'>
                     <div class="form-row">
                         <label for="school_name" class="col-md-4 col-form-label">School Name</label>
@@ -141,7 +133,24 @@
                 </form>
             </div>
             <div class="reg_col_right">
-                <a href='/update_pic'>Add or Update your Profile Picture</a>
+            <h4>Social Media</h4><br>
+                <p>To send updates to Facebook follow these steps.</p>
+                <ol>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+                <br>
+                <br>
+                <p>To send updates to Twitter follow these steps.</p>
+                <ol>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
             </div>
     </div>
 </body>

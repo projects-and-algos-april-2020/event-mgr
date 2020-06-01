@@ -15,7 +15,7 @@
 
         .container{
             width: 700px;
-            height: 350px;
+            height: 550px;
             margin: 40px auto;
             padding: 20px 0px 0px 50px;
             background-color: rgb(165, 165, 165);
@@ -25,7 +25,7 @@
 
         #top-box{
             width: 600px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             padding: 16px 0px 10px 0px;
             background-color: rgb(75, 172, 75);
             border-radius: 10px;
@@ -48,7 +48,7 @@
             background-color: rgb(14, 103, 158);
             color: white;
             border-radius: 20px;
-            margin: 40px 15px 20px 0px;
+            margin: 60px 15px 30px 0px;
         }
 
         div #newreg {
@@ -75,19 +75,18 @@
             margin: 0px 0px 0px 22px;
         }
 
+        .demo_login {
+            text-align: center;
+           margin-left: -60px;
+        }
+
     </style>
     <title>Student Event Manager</title>
 </head>
 
 <body>
     <div class="container">
-                        {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <p>{{message}}</p>
-                        {% endfor %}
-                        {% endif %}
-                        {% endwith %}
+
         <div id="top-box">
             <img src="static/img/find-college.png" height="60" alt="1000mods"><h3>Welcome to Student Event Manager!</h3>
         </div>
@@ -135,7 +134,7 @@
         </div>
         <button data-toggle="collapse" class="btn btn-warning" data-target="#left">Student Login</button>
             <br>
-            <br>
+
         <div id="left" class="collapse">
             <form action="/login" method='POST'>
                 <div class="form-group row">
@@ -156,10 +155,28 @@
                             <input type="submit" class="btn btn-warning" value="Login">
                         </div>
                     </div>
+                </div></div><br><br><br>
+
+                <div class="demo_login">
+                <h2>Student Event Manager is Free!</h2>
+                <h3>Use the following login and take a look.</h3>
+                <br>
+                <br>
+                <h4>Email = demo@demo.com</h4>
+                <h4>Password = password</h4>
+                    <br>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                 </div>
             </form>
         </div>
     </div>
+
 </body>
 
 </html>
